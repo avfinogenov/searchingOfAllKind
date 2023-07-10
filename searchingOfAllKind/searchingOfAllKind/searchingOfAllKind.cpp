@@ -1,20 +1,82 @@
-﻿// searchingOfAllKind.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
-
+﻿
 #include <iostream>
+#include <vector>
+#include <random>
+
+int linearSearch(std::vector<int>& input, int key);
+void fillArrayRand(std::vector<int>& input, int size);
+void fillArrayCont(std::vector<int>& input, int size);
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	std::vector<int> arrayForSearch;
+	int mode = -1;
+	while (mode != 1 && mode != 2)
+	{
+		std::cout << "enter mode: 1 - continious, 2 - random filling\n";
+
+		std::cin >> mode;
+	}
+	mode == 1 ? fillArrayCont(arrayForSearch, 100) : fillArrayRand(arrayForSearch, 100);
+	
+	
+	int input = -1;
+	while (input != 0)
+	{
+		std::cout << "input value for search\n";
+		std::cin >> input;
+
+		std::cout << "value at index: " << linearSearch(arrayForSearch, input);
+		std::cout << "\n";
+	}
+	
+
+
+
 }
 
-// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
-// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
 
-// Советы по началу работы 
-//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
-//   2. В окне Team Explorer можно подключиться к системе управления версиями.
-//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
-//   4. В окне "Список ошибок" можно просматривать ошибки.
-//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
-//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.
+
+int linearSearch(std::vector<int>& input, int key)
+{
+	for (int i = 0; i < input.size(); ++i)
+	{
+		if (input[i] == key)
+		{
+			return i;
+		}
+	}
+	return -1;
+}
+
+
+
+void fillArrayCont(std::vector<int>& input, int size)
+{
+	for (int i = 0; i < size; ++i)
+	{
+		input.push_back(i);
+	}
+
+}
+
+void fillArrayRand(std::vector<int>& input, int size)
+{
+	srand(time(0));
+	for (int i = 0; i < size; ++i)
+	{
+		input.push_back(rand() % 50);
+	}
+	for (int i = 0; i < input.size(); ++i)
+	{
+		for (int j = 0; j < input.size() - 1; ++j)
+		{
+			if (input[j] > input[j + 1])
+			{
+				std::swap(input[j], input[j + 1]);
+			}
+		}
+	}
+}
+
+
