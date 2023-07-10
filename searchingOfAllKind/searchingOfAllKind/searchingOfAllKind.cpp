@@ -7,7 +7,7 @@
 
 
 int linearSearch(std::vector<int>& input, int key);
-
+int binarySearch(int* input, int key, int size);
 
 int main()
 {
@@ -27,8 +27,8 @@ int main()
 	{
 		std::cout << "input value for search\n";
 		std::cin >> input;
-
-		std::cout << "value at index: " << linearSearch(arrayForSearch, input);
+		std::cout << "linear search value at index: " << linearSearch(arrayForSearch, input) << "\n";
+		std::cout << "binary search value at index: " << binarySearch(&arrayForSearch[0], input, arrayForSearch.size());
 		std::cout << "\n";
 	}
 	
@@ -53,5 +53,29 @@ int linearSearch(std::vector<int>& input, int key)
 
 
 
+int binarySearch(int* input, int key, int size)
+{
+	int middlePosition = size / 2;
+	if (size <= 0)
+	{
+		return -1;
+	}
+	if (input[middlePosition] == key)
+	{
+		return middlePosition;
+	}
+	if (input[middlePosition] > key)
+	{
+		int tmp = binarySearch(&input[0], key, middlePosition);
+		return tmp == -1 ? -1 : tmp;
+	}
+	if (input[middlePosition] < key)
+	{
+		int tmp = binarySearch(&input[middlePosition + 1], key, size - middlePosition - 1);
+		return tmp == -1 ? -1 : middlePosition + tmp + 1;
+	}
 
+
+
+}
 
