@@ -9,7 +9,8 @@
 int linearSearch(std::vector<int>& input, int key);
 int binarySearch(int* input, int key, int size);
 int kmpSearch(std::vector<int>& array, std::vector<int>& templateArray);
-
+int  findMin(std::vector<int>& input);
+int  findMax(std::vector<int>& input);
 
 int main()
 {
@@ -39,14 +40,22 @@ int main()
 	
 	std::vector<int> arrayForSearch;
 	std::vector<int> pattern;
-	fillArrayRand(arrayForSearch, 1000, false);
-	fillArrayRand(pattern, 2, false);
+	fillArrayRand(arrayForSearch, 1000, true);
+	//fillArrayRand(pattern, 2, false);
+	int max = findMax(arrayForSearch);
+	int min = findMin(arrayForSearch);
 	int tmp;
-	while (-1 == (tmp = kmpSearch(arrayForSearch, pattern)))
+	int index = 0;
+	index = binarySearch(&arrayForSearch[0], max, arrayForSearch.size());
+	std::cout << max << " " << arrayForSearch[index] << "\n";
+	index = binarySearch(&arrayForSearch[0], min, arrayForSearch.size());
+	std::cout << min << " " << arrayForSearch[index] << "\n";
+
+	/*while (-1 == (tmp = kmpSearch(arrayForSearch, pattern)))
 	{
 		fillArrayRand(pattern, 5, false);
-	}
-	std::cout << tmp;
+	}*/
+	//std::cout << tmp;
 	int tmp2 = 0;
 
 
@@ -162,4 +171,30 @@ int kmpSearch(std::vector<int> &array, std::vector<int> &templateArray)
 	return -1;
 
 
+}
+
+int  findMax(std::vector<int>& input)
+{
+	int max = input[0];
+	for (int i = 1; i < input.size(); ++i)
+	{
+		if (input[i] > max)
+		{
+			max = input[i];
+		}
+	}
+	return max;
+}
+
+int  findMin(std::vector<int>& input)
+{
+	int min = input[0];
+	for (int i = 1; i < input.size(); ++i)
+	{
+		if (input[i] < min)
+		{
+			min = input[i];
+		}
+	}
+	return min;
 }
