@@ -57,7 +57,8 @@ int insertPattern(std::vector<int>& input, std::vector<int> &pattern)
 
 	for (int i = 0; i < pattern.size(); ++i)
 	{
-		input.insert(input.begin() + insertPosition,  pattern.begin(), pattern.end());
+		input.insert(input.begin() + insertPosition, 
+			pattern.begin(), pattern.end());
 		
 	}
 	return insertPosition;
