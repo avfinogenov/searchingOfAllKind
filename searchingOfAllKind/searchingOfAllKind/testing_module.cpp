@@ -1,9 +1,11 @@
 #include "testing_module.h"
 
 
+
 void test()
 {
 	
+	std::cout << "linear and binary search test\n";
 	std::vector<int> arrayForSearch;
 	int mode = -1;
 	while (mode != 1 && mode != 2)
@@ -13,8 +15,7 @@ void test()
 		std::cin >> mode;
 	}
 	mode == 1 ? fillArrayCont(arrayForSearch, 100) :
-		fillArrayRand(arrayForSearch, 100, true);
-
+		fillArrayRand(arrayForSearch, 100) , quickSort(arrayForSearch);
 
 	int input = -1;
 	while (input != 0)
@@ -29,10 +30,12 @@ void test()
 	}
 	//i know thats bad testing, better version will be later
 
-	//std::vector<int> arrayForSearch;
-	std::vector<int> pattern;
-	fillArrayRand(arrayForSearch, 1000, true);
-	//fillArrayRand(pattern, 2, false);
+
+
+	std::cout << "min and max search test\n";
+	fillArrayRand(arrayForSearch, 1000);
+	quickSort(arrayForSearch);
+
 	int max = findMax(arrayForSearch);
 	int min = findMin(arrayForSearch);
 	int tmp;
@@ -42,11 +45,33 @@ void test()
 	index = binarySearch(&arrayForSearch[0], min, arrayForSearch.size());
 	std::cout << min << " " << arrayForSearch[index] << "\n";
 
-	/*while (-1 == (tmp = kmpSearch(arrayForSearch, pattern)))
+	std::cout << "kmp test\n";
+
+	std::vector<int> pattern;
+	fillArrayRand(arrayForSearch, 1000);
+	fillArrayRand(pattern, 2);
+	while (-1 == (tmp = kmpSearch(arrayForSearch, pattern)))
 	{
-		fillArrayRand(pattern, 5, false);
-	}*/
-	//std::cout << tmp;
+		fillArrayRand(pattern, 5);
+	}
+	std::cout << tmp << "\n";
+
+	
+	for (int i = 0; i < 10; ++i)
+	{
+		fillArrayRand(arrayForSearch, 1000);
+		fillArrayRand(pattern, 2);
+		int result = kmpSearch(arrayForSearch, pattern);
+		std::cout << result << "\n";
+		int insertPosition = insertPattern(arrayForSearch, pattern);
+		std::cout << insertPosition << "\n";
+		result = kmpSearch(arrayForSearch, pattern);
+		std::cout << result << "\n";
+	}
+
+	
+
+	
 	int tmp2 = 0;
 
 }
